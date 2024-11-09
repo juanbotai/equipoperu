@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot de Preguntas y Respuestas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .chat-container {
+            width: 1500px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+        }
+        .chatbox {
+            width: 100%;
+            height: 700px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .user, .bot {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .user {
+            background-color: #e0e0e0;
+            text-align: right;
+        }
+        .bot {
+            background-color: #d1f2eb;
+        }
+        .input-container {
+            display: flex;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .input-container button {
+            padding: 8px;
+            margin-left: 5px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chatbox" id="chatbox">
+        <div class="bot">¡Hola! Soy Juan Quispe. ¿Cómo puedo ayudarte con tus preguntas sobre suplementos alimenticios y bienestar?</div>
+    </div>
+    <div class="input-container">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta aquí..." onkeydown="handleKeyPress(event)">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const userInput = document.getElementById("userInput").value;
+        if (userInput.trim() === "") return;
+
+        displayMessage(userInput, "user");
+
+        const response = getBotResponse(userInput);
+        displayMessage(response, "bot");
+
+        document.getElementById("userInput").value = "";
+    }
+
+    function displayMessage(message, sender) {
+        const chatbox = document.getElementById("chatbox");
+        const messageElement = document.createElement("div");
+        messageElement.classList.add(sender);
+        messageElement.innerText = message;
+        chatbox.appendChild(messageElement);
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function normalizeInput(input) {
+        return input.toLowerCase()
+                    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/["']/g, "");
+    }
+
+    function getBotResponse(input) {
+        input = normalizeInput(input);
+
+        // Preguntas y respuestas
+        if (input.includes("hola")) return "Soy Juan, ¿cómo puedo ayudarte con tus preguntas sobre suplementos y bienestar?";
+if (input.includes("tratamiento de cancer")) return "tomar 6 capsulas en la mañana 6 al medio dia y 6 en la noche ";
+        if (input.includes("quien eres")) return "Soy Juan Quispe, especializado en suplementos y bienestar. ¿Cómo puedo ayudarte?";
+        if (input.includes("megatrendencias bienestar")) return "Las 4 megatendencias del bienestar son la salud mental, la nutrición personalizada, la prevención de enfermedades y la salud sustentable.";
+        if (input.includes("salud mental")) return "El cuidado de la salud mental es una de las megatendencias, con suplementos como el magnesio y el omega-3 que apoyan el bienestar emocional.";
+        if (input.includes("nutrición personalizada")) return "La nutrición personalizada es clave para alcanzar metas específicas. Los suplementos como vitaminas y minerales adaptados a tu genética son cada vez más populares.";
+        if (input.includes("prevención de enfermedades")) return "La prevención es crucial. Suplementos como la vitamina C, el zinc y el colágeno ayudan a fortalecer el sistema inmunológico y la salud articular.";
+        if (input.includes("salud sustentable")) return "La salud sustentable aboga por productos naturales y éticos. Muchos suplementos ahora son orgánicos y veganos.";
+        if (input.includes("4life")) return "4Life es una empresa de suplementos de salud, que sigue las tendencias del bienestar como la nutrición personalizada y la salud mental.";
+        if (input.includes("suplementos para la piel")) return "Contamos con suplementos para la piel como el colágeno y la vitamina E, que promueven la elasticidad y salud cutánea.";
+        if (input.includes("colágeno")) return "El colágeno es esencial para la salud de las articulaciones, piel y cabello. Te ofrecemos colágeno hidrolizado que es más fácil de absorber.";
+        if (input.includes("omega-3")) return "El omega-3 es un ácido graso esencial que apoya la salud cerebral, cardiovascular y la reducción de la inflamación.";
+        if (input.includes("magnesio")) return "El magnesio es crucial para la función muscular y nerviosa. Ayuda a reducir el estrés y a mejorar el sueño.";
+        if (input.includes("suplementos para la memoria")) return "Ofrecemos suplementos con ginkgo biloba y otros ingredientes naturales que pueden ayudar a mejorar la memoria y concentración.";
+        if (input.includes("productos para el estrés")) return "Para el estrés, tenemos suplementos con adaptógenos como el ashwagandha, que ayudan a manejar la ansiedad.";
+        if (input.includes("vitamina c")) return "La vitamina C es un antioxidante que refuerza el sistema inmunológico y promueve la salud de la piel.";
+        if (input.includes("suplementos veganos")) return "Sí, tenemos productos veganos como proteínas vegetales, multivitamínicos y suplementos para la salud digestiva.";
+        if (input.includes("como perder peso")) return "La combinación de suplementos adecuados, una dieta balanceada y ejercicio es clave. Consulta nuestros productos para el control de peso.";
+        if (input.includes("como ganar músculo")) return "Para ganar músculo, la proteína es esencial. Ofrecemos suplementos de proteínas, aminoácidos y creatina.";
+        if (input.includes("tienen suplementos para el sueño")) return "Sí, tenemos suplementos como melatonina y valeriana, que promueven un sueño reparador.";
+        if (input.includes("que es un suplemento alimenticio")) return "Un suplemento alimenticio es un producto que aporta nutrientes adicionales a la dieta para mejorar la salud general.";
+        if (input.includes("tienen productos para el sistema inmunológico")) return "Sí, tenemos productos como vitamina C, zinc y probióticos, que apoyan un sistema inmunológico fuerte.";
+        if (input.includes("ofrecen productos naturales")) return "La mayoría de nuestros productos son naturales, con ingredientes orgánicos y libres de aditivos artificiales.";
+
+        return "Lo siento, no tengo una respuesta para esa pregunta.";
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+</script>
+
+</body>
+</html>
